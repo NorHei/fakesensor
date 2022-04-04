@@ -1,5 +1,10 @@
+<?php
+/**
+ * Simple Script for testing Post Vars
+ */
+?>
 <pre>
-    HAAALLLLOOOO
+    PostVars:
 <?php
 //print_r($_SERVER);
 print_r($_POST);
