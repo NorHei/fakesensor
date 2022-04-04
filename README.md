@@ -1,2 +1,2 @@
 # Fakesensor
-Der Fakesensor ist da um Testdaten für die Applikation zu generieren. 
+Fakesensor is for generating fake data for the application
