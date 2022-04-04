@@ -29,8 +29,9 @@ class fakeSensor {
     /** @var string $ipAddress*/
     public $ipAddress = '123.2.2.7';
     
-
     // The next ones are protected so they are not included in JSON convert
+    // Keep in mind that you neet to use the setters or otherwise PHP will
+    // do strange things in the JsonObject
 
     /** @var string $pushUrl */
     protected $pushUrl;
@@ -43,8 +44,6 @@ class fakeSensor {
 
     /** @var string $randomActive*/
     protected $randomActive=true;
-
-
 
     // End class variables
     ///////////////////////////////////
@@ -131,9 +130,9 @@ class fakeSensor {
     public function setRandomActive($randomActive=true) {
         $this->randomActive = $randomActive;    
     }
+
     // Getters and Setters End    
     //////////////////////////////////////    
-
 
     //////////////////////////////////////
     // Main Methods    
@@ -149,9 +148,7 @@ class fakeSensor {
         $this->setRandomActive($randomActive);
         $this->setRandomMode($randomMode);
     }
-
-    
-    
+   
     /**
      * Generates random data for the object
      * 
@@ -165,9 +162,10 @@ class fakeSensor {
         $glitchme = random_int(0, 100); // Approx. every 5th run
         
         // Don't go full crap data every time 
-        if (    $this->randomMode!="normal" AND 
-                $glitchme % 5  == 0  // Approx. every 5th  run
+        if ($this->randomMode!="normal" AND 
+            $glitchme % 5  == 0  // Approx. every 5th  run
         ) {
+            // Really crappy Data
             $this->title       = $this->random_string(random_int(0,1000));
             $this->hash        = $this->random_string(random_int(0,1000));            
             $this->tempValue   = $this->random_string(random_int(0,10));      
@@ -176,8 +174,17 @@ class fakeSensor {
             $this->co2Value    = $this->random_string(random_int(0,20));           
             $this->ipAddress   = $this->random_string(random_int(0,15)); 
 
+        } 
+        elseif ($this->randomMode!="normal" AND 
+                $glitchme % 6  == 0  // Approx. every 6th  run
+        ) {
+            // From time to time remove an attribute
+            $this->hash = NULL;
+            unset($this->hash);
         }
+
         else {
+            // Standard changing Data
             $this->tempValue   = random_int(0,1000) * 0.97;
             $this->temperature = random_int(-20, 40);
             $this->setCo2Ppm   (random_int(200, 1000));
@@ -186,11 +193,12 @@ class fakeSensor {
     }
 
     /**
-     * Convert object to Json and trigger sending
+     * Possibly generate random data, convert object to JSON and trigger sending.
      *
      * @return bool|string
      */
     public function send() {
+
         // Generate random data if $this->randomActive true
         $this->generateRandomData();
 
@@ -209,8 +217,6 @@ class fakeSensor {
      * @return bool|string
      */
     protected function sendData() {
-
-        var_dump($this->jsonData);
         
         $curl = curl_init($this->pushUrl);
         
@@ -219,7 +225,7 @@ class fakeSensor {
             CURLOPT_HEADER         => 0,
             CURLOPT_POSTFIELDS     => $this->jsonData,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_SSL_VERIFYPEER => false
+            CURLOPT_SSL_VERIFYPEER => false // To operate on selfsigning certificates.
         );
         
         curl_setopt_array( $curl, $options);

@@ -1,8 +1,14 @@
 <?php
+/**
+ * This is the example file for building simulated sensors. 
+ */
 
 require_once ('fakeSensor.php');
 
-$sendJson = new fakeSensor('https://mein-kaffe.de/cron/receive.php', true, "killer");
+// URL to send,  generate random values (true,false), send complete garbage packages from time to time ("normal", "killer").  
+$sendJson = new fakeSensor('https://mein-kaffe.de/cron/receive.php', true, "nol");
+
+// Test file for detailed POST variables
 //$sendJson = new fakeSensor('https://mein-kaffe.de/cron/post_test.php', false);
 
 $sendJson->setTitle('Test Title');

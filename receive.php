@@ -1,20 +1,9 @@
 <?php
+require_once ('dataObject.php');
 
-require_once ('sensorReceiveData.php');
+$myDataObject = dataObject::Deserialize($_POST['jsonData']);
 
-
-$receiveData = new sensorReceiveData();
-
-$data = $receiveData->receive($_POST);
-
-
-vardump($data);
+print_r($myDataObject);
+echo "dfdfdfdfdf";
 
 
-function vardump($data) {
-    echo "<pre>";
-    print_r($data);
-    echo "</pre>";
-}
-
-?>
