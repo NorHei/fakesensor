@@ -1,7 +1,7 @@
 <?php
-require_once ('dataObject.php');
+include ('dataObject.php');
 
-echo"dfdfdfdf";
+echo"RECIEVED\n";
 
 $myDataObject = dataObject::Deserialize($_POST['jsonData']);
 

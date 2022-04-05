@@ -6,7 +6,7 @@
 require_once ('fakeSensor.php');
 
 // URL to send,  generate random values (true,false), send complete garbage packages from time to time ("normal", "killer").  
-$sendJson = new fakeSensor('https://mein-kaffe.de/cron/receive.php', true, "normal");
+$sendJson = new fakeSensor('https://mein-kaffe.de/cron/receive.php', false, "normal");
 
 // Test file for detailed POST variables
 //$sendJson = new fakeSensor('https://mein-kaffe.de/cron/post_test.php', false);
@@ -21,5 +21,5 @@ $sendJson->setCo2Value(2.123);
 
 $output = $sendJson->send();
 
-echo ("Testout:\n");
+echo ("Returned Output:\n");
 print_r($output);
