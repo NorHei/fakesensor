@@ -104,7 +104,8 @@ class fakeSensor {
      * @return void
      */
     public function setIpAddress($ipAddress='123.2.2.5') {
-        $this->$ipAddress = $ipAddress;
+        echo"SET IP!!!\n";
+        $this->ipAddress = $ipAddress;
     }
     
     /**

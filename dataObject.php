@@ -1,5 +1,4 @@
 <?php
-echo "Class included!!!\n";
 
 class dataObject {
       
@@ -52,9 +51,23 @@ class dataObject {
             $cFilled++;
         }
         echo"   $cFilled       $cProperties          \n";
+        
+        // All properties have benn filled?
+        if ($cFilled == $cProperties ){
+            // Validation ok so return Object
+            if ($classInstance->basicValidation()){
+                // but some basic sanitation first
+                $classInstance->basicSanitation();
+                return $classInstance;
+            }
+            else {
+                echo"Basic Validation failed!\n"; 
+            }
 
-        // All properties have benn filled
-        if ($cFilled == $cProperties) return $classInstance;
+        } 
+        else {
+            echo"Invalid properties filled: $cFilled  / Properties: $cProperties\n"; 
+        }
 
         // concerning PHP manual its better to use both
         $classInstance = NULL;
@@ -64,7 +77,67 @@ class dataObject {
     } 
     
 
+    /**
+     * Basic Validation class 
+     * 
+     * Returns True if validation is OK , false otherwise
+     * 
+     * @return bool 
+     */
+    protected function basicValidation() {
+        
+        if (!preg_match("/^(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])(.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])){3}$/", $this->ipAddress)) {
+            echo("IPAdress Validation Failed{$this->ipAddress}\n");
+            return false;
+        }
+            
+        if (!is_string($this->title) OR strlen($this->title) > 250 ){
+            echo("Title Validation Failed: {$this->title}\n");
+            return false;
+        }
+    
+        if (!is_string($this->hash) OR strlen($this->hash) > 250 ){
+            echo("Hash Validation Failed: {$this->hash}\n");
+            return false;
+        }
 
+        if (!is_numeric($this->tempValue)){
+            echo("TempValue Validation Failed: {$this->tempValue}\n");
+            return false;
+        }
+ 
+        if (!is_numeric($this->temperature)){
+            echo("Temperature Validation Failed: {$this->temperature}\n");
+            return false;
+        }
+     
+        if (!is_numeric($this->co2Ppm)){
+            echo("Co2Ppm Validation Failed: {$this->co2Ppm}\n");
+            return false;
+        }
+ 
+        if (!is_numeric($this->co2Value)){
+            echo("co2Value Validation Failed: {$this->co2Value} \n");
+            return false;
+        }
 
+        echo "Validation K! \n";
+        return true;
+
+    }
+
+    /**
+     * Just some really basic sanitation.
+     * 
+     * @return void
+     */
+    protected function basicSanitation() {
+        
+        $this->tempValue = (float)$this->tempValue;
+        $this->temperature= (float)$this->temperature;
+        $this->cco2Ppm= (int)$this->cco2Ppm;
+        $this->co2Value= (float)$this->co2Value;
+
+    }
 }
 

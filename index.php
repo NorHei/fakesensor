@@ -18,6 +18,7 @@ $sendJson->setTempValue(1.689);
 $sendJson->setTemperature(1.896);
 $sendJson->setCo2Ppm(2);
 $sendJson->setCo2Value(2.123);
+//$sendJson->setIpAddress("4434.3434.3434.34");
 
 $output = $sendJson->send();
 
