@@ -23,9 +23,6 @@ abstract class DeserializeJSON
         $className = get_called_class();
         $classInstance = new $className();
 
-        if 
-
-        if (is_string($jsonString))
             $jsonString = json_decode($jsonString);
 
         
@@ -36,17 +33,5 @@ abstract class DeserializeJSON
         }
 
         return $classInstance;
-    }
-    /**
-     * @param string $jsonString
-     * @return $this[]
-     */
-    public static function DeserializeArray($jsonString)
-    {
-        $jsonString = json_decode($jsonString);
-        $items = [];
-        foreach ($jsonString as $item)
-            $items[] = self::Deserialize($item);
-        return $items;
     }
 }
