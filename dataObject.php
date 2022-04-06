@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Transform sensor data into a Data Object and do some basic validation and sanitation
+ * 
+ * Still the application needs to do some checks, but a lot of crap is filtered out.  
+ * In addition this class is used for testing the test Sensor class in recieve.php
+ */
 class dataObject {
       
     /** @var string $title */
@@ -120,8 +125,7 @@ class dataObject {
             echo("co2Value Validation Failed: {$this->co2Value} \n");
             return false;
         }
-
-        echo "Validation K! \n";
+        
         return true;
 
     }

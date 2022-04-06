@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * This fakesensor class is made to create simple testsensor scripts that can be callled via cron
+ * 
+ * index.php is an example 
+ */
 class fakeSensor {
 
     /////////////////////////////////
@@ -104,7 +108,6 @@ class fakeSensor {
      * @return void
      */
     public function setIpAddress($ipAddress='123.2.2.5') {
-        echo"SET IP!!!\n";
         $this->ipAddress = $ipAddress;
     }
     
