@@ -45,17 +45,16 @@ class dataObject {
         // needed for check if all are filled
         $cProperties = count((array)$classInstance);
 
-        $jsonString = json_decode($jsonString);
+        $jsonArray = json_decode($jsonString);
         
         $cFilled = 0;
 
-        foreach ($jsonString as $key => $value) {
+        foreach ($jsonArray as $key => $value) {
             if (!property_exists($classInstance, $key)) continue;
 
             $classInstance->{$key} = $value;
             $cFilled++;
         }
-        echo"   $cFilled       $cProperties          \n";
         
         // All properties have benn filled?
         if ($cFilled == $cProperties ){
@@ -139,7 +138,7 @@ class dataObject {
         
         $this->tempValue = (float)$this->tempValue;
         $this->temperature= (float)$this->temperature;
-        $this->cco2Ppm= (int)$this->cco2Ppm;
+        $this->co2Ppm= (int)$this->co2Ppm;
         $this->co2Value= (float)$this->co2Value;
 
     }
