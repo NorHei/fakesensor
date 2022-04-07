@@ -1,0 +1,1 @@
+* * * * * cd /usr/local/www/apache24/noexec/mein-kaffe.de/processwire/cron; /usr/local/bin/php TestSensor1.php  > /usr/local/www/apache24/noexec/mein-kaffe.de/processwire/cron/log/TestSensor1.log
