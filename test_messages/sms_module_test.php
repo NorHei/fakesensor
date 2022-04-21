@@ -16,11 +16,14 @@ echo ("\nPath: " .$path. "\n");
 echo "\nPw Loaded...\n";
 
 $phone = "00491783417997";
-$text   = "Hallo%20Wie%20%0AGehts%21"; 
+$text   = "Hallo wie Gehts, lass uns testen!"; 
 
+// fetch from module factory
 $sender = $modules->SendSms;
-
+// Do sending
 $response = $sender->sendMessage($text, $phone);
 
-echo "\n Response: ". $response. "\n";
+// Response should be 100
+
+echo "\nResponse: ". $response. " (should be 100 to be ok) \n\n";
  
